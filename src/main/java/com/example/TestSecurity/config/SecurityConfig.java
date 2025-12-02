@@ -32,8 +32,6 @@ public class SecurityConfig {
                         .permitAll()
                 );
 
-        http
-                .csrf((auth) -> auth.disable());
 
         http
                 .sessionManagement((auth) -> auth
@@ -44,6 +42,9 @@ public class SecurityConfig {
                 .sessionManagement((auth) -> auth
                         .sessionFixation().changeSessionId());
 
+        http
+                .logout((auth) -> auth.logoutUrl("/logout")
+                        .logoutSuccessUrl("/"));
 
         return http.build();
     }
